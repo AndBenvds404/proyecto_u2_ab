@@ -8,4 +8,5 @@ public interface IEstudianteJdbcService {
 	public Estudiante buscar (int cedula);
 	public void actualizar (Estudiante e);
 	public void eliminar (int cedula);
+
 }

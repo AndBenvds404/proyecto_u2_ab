@@ -1,10 +1,13 @@
 package com.uce.edu.demo.estudiante.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uce.edu.demo.estudiante.repository.IEstudianteJdbcRepository;
 import com.uce.edu.demo.estudiante.to.Estudiante;
+import com.uce.edu.demo.to.PersonaTo;
 @Service
 public class EstudianteJdbcServiceImpl implements IEstudianteJdbcService{
 	@Autowired
@@ -35,6 +38,6 @@ public class EstudianteJdbcServiceImpl implements IEstudianteJdbcService{
 		this.iEstudianteJdbcRepository.eliminar(cedula);
 		
 	}
-	
+
 
 }
