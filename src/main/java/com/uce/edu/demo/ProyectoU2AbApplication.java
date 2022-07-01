@@ -7,13 +7,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.estudiante.service.IEstudianteJdbcService;
-import com.uce.edu.demo.estudiante.to.Estudiante;
-import com.uce.edu.demo.repository.IPersonaJdbcRepository;
-import com.uce.edu.demo.repository.IPersonaJpaRepository;
-import com.uce.edu.demo.repository.modelo.Persona;
-import com.uce.edu.demo.service.IPersonaJdbcService;
-import com.uce.edu.demo.service.IPersonaJpaService;
+import com.uce.edu.demo.estudiante.repository.modelo.Estudiante;
+import com.uce.edu.demo.estudiante.service.IEstudianteJpaService;
+
 
 @SpringBootApplication
 public class ProyectoU2AbApplication implements CommandLineRunner{
@@ -22,7 +18,7 @@ public class ProyectoU2AbApplication implements CommandLineRunner{
 
 
 	@Autowired
-	private IPersonaJpaService iPersonaJpaService;
+	private IEstudianteJpaService iEstudianteJpaService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2AbApplication.class, args);
@@ -34,18 +30,23 @@ public class ProyectoU2AbApplication implements CommandLineRunner{
 		
 		
 		//buscar
-		LOG.info("Dato con JPA: "+this.iPersonaJpaService.buscarPorId(1727)); 
+		LOG.info("Dato con JPA: "+this.iEstudianteJpaService.buscar(1727007)); 
+		
+		Estudiante e = new Estudiante();
+		e.setCedula(1727009);
+		e.setNombre("Pedro");
+		e.setApellido("Picapiedra");
+		e.setSemestre("octavo");
+		e.setNumeroMaterias(4);
+		e.setNumeroHorasSemanales(22);
+		
 		//insertar
-		Persona p = new Persona();
-		p.setId(4);
-		p.setNombre("FrancHesco");
-		p.setApellido("Virgolini");
-		//this.iPersonaJpaService.insertar(p);
+//		this.iEstudianteJpaService.insertar(e);
 		//actualizar
-		p.setNombre("Francesco");
-		this.iPersonaJpaService.actualizar(p);
+		e.setNombre("Pablo");
+		this.iEstudianteJpaService.actualizar(e);
 		//eliminar
-		this.iPersonaJpaService.eliminar(2);
+		this.iEstudianteJpaService.eliminar(1727007);
 		
 		
 		

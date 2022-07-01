@@ -2,11 +2,10 @@ package com.uce.edu.demo.estudiante.service;
 
 import com.uce.edu.demo.estudiante.repository.modelo.Estudiante;
 
-public interface IEstudianteJdbcService {
+public interface IEstudianteJpaService {
 
 	public void insertar (Estudiante e);
-	public Estudiante buscar (int cedula);
+	public Estudiante buscar (Integer cedula);
 	public void actualizar (Estudiante e);
-	public void eliminar (int cedula);
-
+	public void eliminar (Integer cedula);
 }

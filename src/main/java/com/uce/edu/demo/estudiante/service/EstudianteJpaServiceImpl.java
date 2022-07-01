@@ -1,45 +1,42 @@
 package com.uce.edu.demo.estudiante.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.uce.edu.demo.estudiante.repository.IEstudianteJdbcRepository;
+import com.uce.edu.demo.estudiante.repository.IEstudianteJpaRepository;
 import com.uce.edu.demo.estudiante.repository.modelo.Estudiante;
 
-
 @Service
-public class EstudianteJdbcServiceImpl implements IEstudianteJdbcService{
-	
+public class EstudianteJpaServiceImpl implements IEstudianteJpaService{
+
 	@Autowired
-	private IEstudianteJdbcRepository iEstudianteJdbcRepository;
+	private IEstudianteJpaRepository iEstudianteJpaRepository;
+	
 	
 	@Override
 	public void insertar(Estudiante e) {
 		// TODO Auto-generated method stub
-		this.iEstudianteJdbcRepository.insertar(e);
-		
+		this.iEstudianteJpaRepository.insertar(e);
 	}
 
 	@Override
-	public Estudiante buscar(int cedula) {
+	public Estudiante buscar(Integer cedula) {
 		// TODO Auto-generated method stub
-		return this.iEstudianteJdbcRepository.buscar(cedula);
+		return this.iEstudianteJpaRepository.buscar(cedula);
 	}
 
 	@Override
 	public void actualizar(Estudiante e) {
 		// TODO Auto-generated method stub
-		this.iEstudianteJdbcRepository.actualizar(e);
+		this.iEstudianteJpaRepository.actualizar(e);
 	}
 
 	@Override
-	public void eliminar(int cedula) {
+	public void eliminar(Integer cedula) {
 		// TODO Auto-generated method stub
-		this.iEstudianteJdbcRepository.eliminar(cedula);
-		
+		this.iEstudianteJpaRepository.eliminar(cedula);
 	}
-
+	
+	
 
 }
