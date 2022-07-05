@@ -19,6 +19,11 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository{
 		// TODO Auto-generated method stub
 		return this.entityManager.find(Persona.class,id); //clase de la entidad y la anotacion con "id"
 	}
+	
+	public Persona buscarPorCedula(Integer id) {
+		// TODO Auto-generated method stub
+		return this.entityManager.find(Persona.class,id); //clase de la entidad y la anotacion con "id"
+	}
 
 	@Override
 	public void insertar(Persona p) {
