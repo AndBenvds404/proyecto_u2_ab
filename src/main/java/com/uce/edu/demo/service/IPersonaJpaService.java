@@ -1,8 +1,14 @@
 package com.uce.edu.demo.service;
 
+import java.util.List;
+
 import com.uce.edu.demo.repository.modelo.Persona;
 
 public interface IPersonaJpaService {
+	
+	public List <Persona> buscarPorApellido(String apellido);
+	public List <Persona> buscarPorGenero (String genero);
+	public Persona buscarPorCedula(String cedula);
 	public Persona buscarPorId (Integer id);
 	public void insertar (Persona p);
 	public void actualizar (Persona p);
