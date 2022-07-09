@@ -80,7 +80,7 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository{
 	@Override
 	public List<Persona> buscarPorNombre(String nombre) {
 		Query myQuery = this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.nombre= :datonombre");	
-		myQuery.setParameter("datogenero", nombre); //reemplaza datoapellido por el apellido del parametro
+		myQuery.setParameter("datonombre", nombre); //reemplaza datoapellido por el apellido del parametro
 
 		return myQuery.getResultList();
 	}

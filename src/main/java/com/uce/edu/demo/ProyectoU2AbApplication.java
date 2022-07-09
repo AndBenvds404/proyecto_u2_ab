@@ -35,14 +35,14 @@ public class ProyectoU2AbApplication implements CommandLineRunner{
        // p.setId(6);
         p.setNombre("Franchesco");
         p.setApellido("Virgolini");
-        p.setCedula("17272004");
+        p.setCedula("17272005");
         p.setGenero("M");
         
         //Guardar
         this.iPersonaJpaService.insertar(p);;
         
         //Buscar por cedula
-        LOG.info(this.iPersonaJpaService.buscarPorCedula("17272004"));// retorna un unico resultado
+        LOG.info(this.iPersonaJpaService.buscarPorCedula("17272003"));// retorna un unico resultado
         
         //Buscar por id
        
