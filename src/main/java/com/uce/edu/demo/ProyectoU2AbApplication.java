@@ -33,48 +33,23 @@ public class ProyectoU2AbApplication implements CommandLineRunner{
 		
 		Persona p = new Persona();
        // p.setId(6);
-        p.setNombre("Franchesco");
-        p.setApellido("Virgolini");
-        p.setCedula("17272005");
-        p.setGenero("M");
+        p.setNombre("Silvia");
+        p.setApellido("Muños");
+        p.setCedula("17272009");
+        p.setGenero("F");
         
-        //Guardar
-        this.iPersonaJpaService.insertar(p);;
+    	Persona p1 = new Persona();
+        // p1.setId(6);
+         p1.setNombre("Daniel");
+         p1.setApellido("Kuper");
+         p1.setCedula("17272010");
+         p1.setGenero("M");
         
-        //Buscar por cedula
-        LOG.info(this.iPersonaJpaService.buscarPorCedula("17272003"));// retorna un unico resultado
-        
-        //Buscar por id
-       
-        LOG.info(this.iPersonaJpaService.buscarPorId(14));
-        
-        List<Persona> listaPersona = this.iPersonaJpaService.buscarPorApellido(("Virgolini"));
-        for (Persona item: listaPersona) {
-        	LOG.info("Persona" + item);
-        }
-        
-        Persona p1 = new Persona();
-        //p1.setId(1727);
-        p1.setNombre("Luigui");
-        p1.setApellido("Bros");
-        p1.setCedula("17272002");
-        //Actualizar
-        //this.iPersonaJpaService.actualizar(p1);
-
-        //Eliminar
-        //this.iPersonaJpaService.eliminar(1);
-		
-		
-        
-        List<Persona> listaPersona1 = this.iPersonaJpaService.buscarPorGenero(("M"));
-        for (Persona item: listaPersona1) {
-        	LOG.info("Genero" + item);
-        }
-        
-        List<Persona> listaPersona2 = this.iPersonaJpaService.buscarPorNombre(("Francesco"));
-        for (Persona item: listaPersona2) {
-        	LOG.info("Nombres" + item);
-        }
+         int resultado=this.iPersonaJpaService.actualizarPorApellido("MEN", "Virgolini");
+         LOG.info("cantidad de registros actualizados: "+ resultado);
+         
+         int resultado1=this.iPersonaJpaService.eliminarPorGenero("F");
+         LOG.info("cantidad de registros eliminados: "+ resultado1);
 		
 	}
 
