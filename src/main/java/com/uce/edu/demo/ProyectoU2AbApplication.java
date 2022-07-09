@@ -65,7 +65,16 @@ public class ProyectoU2AbApplication implements CommandLineRunner{
         //this.iPersonaJpaService.eliminar(1);
 		
 		
-		
+        
+        List<Persona> listaPersona1 = this.iPersonaJpaService.buscarPorGenero(("M"));
+        for (Persona item: listaPersona1) {
+        	LOG.info("Genero" + item);
+        }
+        
+        List<Persona> listaPersona2 = this.iPersonaJpaService.buscarPorNombre(("Francesco"));
+        for (Persona item: listaPersona2) {
+        	LOG.info("Nombres" + item);
+        }
 		
 	}
 
