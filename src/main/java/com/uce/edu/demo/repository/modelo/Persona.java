@@ -38,7 +38,7 @@ public class Persona {
 	}
 
 
-
+	//set and get
 	public Integer getId() {
 		return id;
 	}
@@ -93,7 +93,7 @@ public class Persona {
 		return genero;
 	}
 	
-	//set and get
+	
 
 	
 	
