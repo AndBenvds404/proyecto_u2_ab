@@ -1,6 +1,7 @@
 package com.uce.edu.demo;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +14,7 @@ import com.uce.edu.demo.prueba.modelo.Propietario;
 import com.uce.edu.demo.prueba.modelo.Vehiculo;
 import com.uce.edu.demo.prueba.service.IPropietarioService;
 import com.uce.edu.demo.prueba.service.IVehiculoService;
+import com.uce.edu.demo.repository.modelo.Persona;
 import com.uce.edu.demo.service.IPersonaJpaService;
 
 
@@ -23,8 +25,7 @@ public class ProyectoU2AbApplication implements CommandLineRunner{
 
 	
 	@Autowired
-	private IVehiculoService iVehiculoService;
-	
+	private IPersonaJpaService iPersonaJpaService;	
 	@Autowired
 	private IPropietarioService iPropietarioService;
 	
@@ -41,49 +42,32 @@ public class ProyectoU2AbApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		//Ingresar un propietario
+		Persona p = new Persona();
+		p.setApellido("Horseman");
+		p.setCedula("0014");
+		p.setNombre("Bojack");
+		p.setGenero("M");
+		//this.iPersonaJpaService.insertar(p);
+
+		// 1 Typed
+		Persona perTyped = this.iPersonaJpaService.buscarPorCedulaTyped("0014");
+		LOG.info("Persona Typed: "+perTyped);
 		
-		Propietario p = new Propietario();
-		p.setApellido("Benavides");
-		p.setNombre("Andres");
-		p.setCedula("1209876550");
-		this.iPropietarioService.insertar(p);
+		// 2 NamedQuery
+		Persona perNamed = this.iPersonaJpaService.buscarPorCedulaNamed("0014");
+		LOG.info("Persona Named: "+ perNamed);
 		
-		//Eliminar propietario
-		this.iPropietarioService.eliminar("1209876549");
+		// 3 TypedNamed
+		Persona perTypedNamed= this.iPersonaJpaService.buscarPorCedulaTypedNamed("0014");
+		LOG.info("Persona TypedNamed: "+ perTypedNamed);
+
+		// 4 Varios NAmedQuery
 		
+		List<Persona> listaPersona= this.iPersonaJpaService.buscarPorNombreApellido("Franchesco","Virgolini" );
 		
-///////////////////////// CRUD VEHICULOS ////////////////////	
-		
-		//Insertar vehiculo
-		
-		Vehiculo vehiculo = new Vehiculo();
-		vehiculo.setMarca("Toyota");
-		vehiculo.setPlaca("PCT002");
-		vehiculo.setPrecio(new BigDecimal(30000));
-		vehiculo.setTipo("L");
-		this.iVehiculoService.insertar(vehiculo);
-		
-		
-		//Actualizar vehiculo
-		
-		vehiculo.setMarca("Toyota");
-		vehiculo.setPlaca("PCT4321");
-		vehiculo.setPrecio(new BigDecimal(40000));
-		vehiculo.setTipo("Pesado");
-		this.iVehiculoService.actualizar(vehiculo);
-		
-		//Buscar vehiculo por placa
-		LOG.info(this.iVehiculoService.buscarPorPlaca("PCT4321"));
-		
-		//eliminar vehiculo
-		this.iVehiculoService.eliminar("PCT001");
-		
-/////////////////////// Crear Matricula ////////////////////	
-		
-		//matricular un vehiculo con propietario
-		//this.iMatriculaGestorService.generar(p.getCedula(), vehiculo.getPlaca());
-				
+		for(Persona item: listaPersona) {
+			LOG.info("lista de personas: "+ item);
+		}
 		
 		
 	}

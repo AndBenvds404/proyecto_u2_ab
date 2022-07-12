@@ -49,7 +49,7 @@ public class MatriculaGestorServiceImpl implements IMatriculaGestorService {
 		}
 		Matricula matricula = new Matricula();
 		matricula.setFechaMatricula(LocalDateTime.now());
-		matricula.setPopietario(p);
+		matricula.setPropietario(p);
 		matricula.setValorMAtricula(valorMatricula);
 		matricula.setVehiculo(v);
 		this.matriculaRepository.crear(matricula);
