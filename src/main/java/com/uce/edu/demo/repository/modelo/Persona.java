@@ -27,15 +27,10 @@ public class Persona {
 
 	@Id
 	@Column(name = "pers_id") // nombre de la columna en la tabla DB
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pers_id_seq") // nombre (original/referencia) del
-																					// secuencia de la db
-	@SequenceGenerator(name = "pers_id_seq", sequenceName = "pers_id_seq", allocationSize = 1) // nombre dela secuecia
-																								// de la base de datos
-																								// (obligatorio debe ser
-																								// igual) y tamaño de
-																								// incremento
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pers_id_seq") // nombre (original/referencia) del																				// secuencia de la db
+	@SequenceGenerator(name = "pers_id_seq", sequenceName = "pers_id_seq", allocationSize = 1) // nombre dela secuecia																				// incremento
 	private Integer id;
-
+	
 	@Column(name = "pers_nombre")
 	private String nombre;
 

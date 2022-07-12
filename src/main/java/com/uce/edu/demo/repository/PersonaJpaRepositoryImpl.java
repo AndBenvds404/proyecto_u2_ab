@@ -43,8 +43,6 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository{
 	public void eliminar(Integer id) {
 		// TODO Auto-generated method stub
 		this.entityManager.remove(this.buscarPorId(id));//remove recibe un entidad/modelo
-		
-		
 	}
 
 	@Override
