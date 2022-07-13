@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -136,7 +138,37 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository{
 	        myQuery.setParameter("datocedula", cedula);
 	        return myQuery.getSingleResult();
 	}
-
+	
+	// Native Query
+	@Override
+	public Persona buscarPorCedulaNative(String cedula) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery("SELECT * FROM persona  WHERE pers_cedula = :datoCedula", Persona.class); // query nativo y el tipo de retorno
+		myQuery.setParameter("datoCedula", cedula);
+		return (Persona) myQuery.getSingleResult();
+	}
+	
+	//Native NamedQuery
+	@Override
+	public Persona buscarPorCedulaNamedNative(String cedula) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNamedQuery("Persona.buscarPorCedulaNamedNative",Persona.class);
+		myQuery.setParameter("datoCedula", cedula);
+		return (Persona) myQuery.getSingleResult();
+	}
+	
+	
+	@Override
+	public Persona buscarPorCedulaCriteriaApi(String cedula) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myBuilder= this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Persona> myQuery= myBuilder.createQuery(Persona.class);
+		
+		//Root FROM
+		
+		
+		return null;
+	}
 
 	
 }
