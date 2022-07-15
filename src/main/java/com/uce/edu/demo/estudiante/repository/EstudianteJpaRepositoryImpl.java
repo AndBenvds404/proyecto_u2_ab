@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.estudiante.repository.modelo.Estudiante;
+import com.uce.edu.demo.repository.modelo.Persona;
 
 
 @Repository
@@ -104,6 +105,52 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository {
 		miQuery.setParameter("datoNumHoras",horas);
 		return miQuery.getResultList();
 	}
+
+	
+	
+	// Native Query
+	@Override
+	public Estudiante buscarPorCedulaNative(Integer cedula) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery("SELECT * FROM estudiante  WHERE estu_cedula = :datoCedula", Estudiante.class); // query nativo y el tipo de retorno
+		myQuery.setParameter("datoCedula", cedula);
+		return (Estudiante) myQuery.getSingleResult();
+		
+	}
+
+	@Override
+	public List<Estudiante> buscarPorNombreNative(String nombre) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery("SELECT * FROM estudiante  WHERE estu_nombre = :datoNombre", Estudiante.class); 
+		myQuery.setParameter("datoNombre", nombre);
+		return (List<Estudiante>) myQuery.getResultList();
+	}
+	
+	
+	// Named Native Query
+	@Override
+	public Estudiante buscarPorSemestreApellidoNamedNative(String semestre, String apellido) {
+		Query myQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorSemestreApellidoNamedNative", Estudiante.class); 
+		myQuery.setParameter("datoSemestre", semestre);
+		myQuery.setParameter("datoApellido", apellido);
+
+		return (Estudiante) myQuery.getSingleResult();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorEdadNamedNative(String edad) {
+		
+		Query myQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorEdadNamedNative", Estudiante.class); 
+		myQuery.setParameter("datoEdad", edad);
+
+		return (List<Estudiante>) myQuery.getResultList();
+	}
+	
+	
+
+	
+	
+	
 	
 	
 

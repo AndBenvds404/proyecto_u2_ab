@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.edu.demo.estudiante.service.IEstudianteJpaService;
 import com.uce.edu.demo.service.IPersonaJpaService;
 
 
@@ -16,7 +17,9 @@ public class ProyectoU2AbApplication implements CommandLineRunner{
 	Logger LOG = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 	
 	@Autowired
-	private IPersonaJpaService iPersonaJpaService;
+	private IEstudianteJpaService iEstudianteJpaService;
+	
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2AbApplication.class, args);
@@ -25,9 +28,16 @@ public class ProyectoU2AbApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
+	
 		
-	this.iPersonaJpaService.buscarPorCedulaNative("17272003");
-	this.iPersonaJpaService.buscarPorCedulaNamedNative("17272003");
+	this.iEstudianteJpaService.buscarPorCedulaNative(1727000);
+	this.iEstudianteJpaService.buscarPorNombreNative("Guillermo");
+	
+	this.iEstudianteJpaService.buscarPorSemestreApellidoNamedNative("segundo", "Iza");
+	this.iEstudianteJpaService.buscarPorEdadNamedNative("28");
+		
+		
+
 		
 		
 	}
