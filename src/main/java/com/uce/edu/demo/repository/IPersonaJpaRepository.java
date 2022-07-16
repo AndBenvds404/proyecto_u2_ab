@@ -15,7 +15,10 @@ public interface IPersonaJpaRepository {
 	public Persona buscarPorCedulaNative(String cedula);
 	public Persona buscarPorCedulaNamedNative(String cedula);
 	public Persona buscarPorCedulaCriteriaApi(String cedula);
+	public Persona buscarDinamicamente (String nombre, String apellido, String genero); //criteria api
 	
+	public Persona buscarDinamicamenteGenero (String nombre, String apellido, String genero); //criteria api
+
 	public Persona buscarPorId (Integer id);
 	public void insertar (Persona p);
 	public void actualizar (Persona p);
