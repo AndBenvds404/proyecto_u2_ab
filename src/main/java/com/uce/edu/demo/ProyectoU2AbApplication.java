@@ -17,7 +17,7 @@ public class ProyectoU2AbApplication implements CommandLineRunner{
 	Logger LOG = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 	
 	@Autowired
-	private IPersonaJpaService iPersonaJpaService;
+	private IEstudianteJpaService iEstudianteJpaService;
 	
 	
 	
@@ -29,14 +29,12 @@ public class ProyectoU2AbApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 	
-		
-	//this.iPersonaJpaService.buscarPorCedulaCriteriaApi("17272003");
+
+	LOG.info("Estudiantes de primer semestre"+this.iEstudianteJpaService.buscarPorSemestreCriteriaApi("primero"));
+
+	//busqueda por apellido y numero de materias si es menor de 21 años, y sólo busqueda por apellido si es mayor que 21
+	LOG.info("Estudiantes por edad"+this.iEstudianteJpaService.buscarDinamicamenteEdad("Lasso", 6, "18"));
 	
-	LOG.info("Persona dinamica"+this.iPersonaJpaService.buscarDinamicamente("Daniela", "Roades", "F"));
-
-	LOG.info("Persona dinamica"+this.iPersonaJpaService.buscarDinamicamente("Sisi", "Gray", "F"));
-
-		
 	}
 
 }

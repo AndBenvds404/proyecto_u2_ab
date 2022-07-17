@@ -6,6 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -146,12 +150,44 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository {
 		return (List<Estudiante>) myQuery.getResultList();
 	}
 	
+	@Override
+	public List<Estudiante> buscarPorSemestreCriteriaApi(String semestre) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myCriteriaBuilder = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Estudiante> myQuery = myCriteriaBuilder.createQuery(Estudiante.class);
+		Root<Estudiante> myTable = myQuery.from(Estudiante.class);
+		Predicate predicateSemestre = myCriteriaBuilder.equal(myTable.get("semestre"), semestre);
+		myQuery.select(myTable).where(predicateSemestre);
+		TypedQuery<Estudiante> myQueryFinal =this.entityManager.createQuery(myQuery);
+		
+		return myQueryFinal.getResultList();
+	}
 	
 
+	@Override
+	public Estudiante buscarDinamicamenteEdad(String apellido, Integer numMaterias, String edad) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Estudiante> myQuery =  myCriteria.createQuery(Estudiante.class);
+		Root<Estudiante> myTable = myQuery.from(Estudiante.class);
+		Predicate predicateApellido = myCriteria.equal(myTable.get("apellido"), apellido);
+		Predicate predicateNumMaterias = myCriteria.equal(myTable.get("numeroMaterias"), numMaterias);
+		
+		Predicate myPredicatefinal = null;		
+		
+		if (Integer.parseInt(edad)<=21) {
+			myPredicatefinal = myCriteria.and(predicateApellido,predicateNumMaterias);
+			
+		}else {
+			myPredicatefinal = myCriteria.or(predicateApellido,predicateNumMaterias);
+		}
+		myQuery.select(myTable).where(myPredicatefinal);
+		TypedQuery<Estudiante> myQueryFinal = this.entityManager.createQuery(myQuery);
+		
+		return myQueryFinal.getSingleResult();
+	}
 	
-	
-	
-	
+
 	
 
 }

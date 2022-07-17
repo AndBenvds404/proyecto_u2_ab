@@ -98,6 +98,18 @@ public class EstudianteJpaServiceImpl implements IEstudianteJpaService{
 		// TODO Auto-generated method stub
 		return this.iEstudianteJpaRepository.buscarPorEdadNamedNative(edad);
 	}
+
+	@Override
+	public List<Estudiante> buscarPorSemestreCriteriaApi(String semestre) {
+		// TODO Auto-generated method stub
+		return this.iEstudianteJpaRepository.buscarPorSemestreCriteriaApi(semestre);
+	}
+
+	@Override
+	public Estudiante buscarDinamicamenteEdad(String apellido, Integer numMaterias, String edad) {
+		// TODO Auto-generated method stub
+		return this.iEstudianteJpaRepository.buscarDinamicamenteEdad(apellido, numMaterias, edad);
+	}
 	
 	
 
