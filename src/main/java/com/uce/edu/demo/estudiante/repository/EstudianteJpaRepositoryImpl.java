@@ -15,7 +15,8 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.estudiante.repository.modelo.Estudiante;
-import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.estudiante.repository.modelo.EstudianteIntervaloEdad;
+import com.uce.edu.demo.estudiante.repository.modelo.EstudianteSencillo;
 
 
 @Repository
@@ -185,6 +186,24 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository {
 		TypedQuery<Estudiante> myQueryFinal = this.entityManager.createQuery(myQuery);
 		
 		return myQueryFinal.getSingleResult();
+	}
+
+	@Override
+	public List<EstudianteSencillo> buscarPorSemestreHorasSencillo(String semestre, Integer horas) {
+		// TODO Auto-generated method stub
+		// busca estudiantes de semestre con horas mayores a: 
+		TypedQuery<EstudianteSencillo> myQuery = this.entityManager.createQuery("SELECT NEW com.uce.edu.demo.estudiante.repository.modelo.EstudianteSencillo(e.semestre, e.numeroHorasSemanales) FROM Estudiante e WHERE (e.semestre = :datoSemestre AND e.numeroHorasSemanales >:datoHoras ) ",EstudianteSencillo.class);
+		myQuery.setParameter("datoSemestre", semestre);
+		myQuery.setParameter("datoHoras", horas);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<EstudianteIntervaloEdad> buscarIntervaloEdadSemestre (String edad) {
+		// TODO Auto-generated method stub														select * from estudiante where (estu_edad between '18' And'20')and estu_semestre = 'primero'
+		TypedQuery<EstudianteIntervaloEdad> myQuery = this.entityManager.createQuery("SELECT NEW com.uce.edu.demo.estudiante.repository.modelo.EstudianteIntervaloEdad(e.cedula, e.apellido) FROM Estudiante e GROUP BY e.edad = :datoEdad",EstudianteIntervaloEdad.class);
+		myQuery.setParameter("datoEdad", edad);
+		return myQuery.getResultList();
 	}
 	
 
