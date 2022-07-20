@@ -32,7 +32,7 @@ public class ProyectoU2AbApplication implements CommandLineRunner{
 		
 		LOG.info("Estudiante Sencillo: "+this.iEstudianteJpaService.buscarPorSemestreHorasSencillo("primero", 24));
 		
-		//LOG.info("Estudiantes Intervalo edad: "+this.iEstudianteJpaService.buscarIntervaloEdadSemestre("18"));
+		LOG.info("Estudiantes Intervalo edad: "+this.iEstudianteJpaService.buscarIntervaloEdadSemestre("18"));
 	
 	}
 
