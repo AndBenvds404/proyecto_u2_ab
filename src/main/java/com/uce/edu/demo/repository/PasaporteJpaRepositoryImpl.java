@@ -6,41 +6,41 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.repository.modelo.Empleado;
-
+import com.uce.edu.demo.repository.modelo.Pasaporte;
 @Repository
 @Transactional
-public class EmpleadoJpaRepositoryImpl implements IEmpleadoJpaRepository {
-	
+public class PasaporteJpaRepositoryImpl implements IPasaporteJpaRepository {
+
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	
 	@Override
-	public void insertar(Empleado empleado) {
+	public void insertar(Pasaporte pasaporte) {
 		// TODO Auto-generated method stub
-		this.entityManager.persist(empleado);
+		this.entityManager.persist(pasaporte);
+	}
+
+	@Override
+	public Pasaporte buscar(String cedula) {
+		// TODO Auto-generated method stub
+		return this.entityManager.find(Pasaporte.class, cedula);
+	}
+
+	@Override
+	public void actualizar(Pasaporte pasaporte) {
+		// TODO Auto-generated method stub
+		this.entityManager.merge(pasaporte);
 		
 	}
 
 	@Override
-	public Empleado buscar(String codigoIess) {
+	public void eliminar(String cedula) {
 		// TODO Auto-generated method stub
-		return this.entityManager.find(Empleado.class, codigoIess);
-	}
-
-	@Override
-	public void actualizar(Empleado empleado) {
-		// TODO Auto-generated method stub
-		this.entityManager.merge(empleado);
+		this.entityManager.remove(this.buscar(cedula));
 		
 	}
-
-	@Override
-	public void eliminar(String codigoIess) {
-		// TODO Auto-generated method stub
-		this.entityManager.remove(codigoIess);
-		
-	}
+	
 	
 	
 

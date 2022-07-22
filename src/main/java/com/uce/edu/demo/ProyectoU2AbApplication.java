@@ -1,6 +1,6 @@
 package com.uce.edu.demo;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,11 +9,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.estudiante.service.IEstudianteJpaService;
 import com.uce.edu.demo.repository.modelo.Ciudadano;
-import com.uce.edu.demo.repository.modelo.Empleado;
+import com.uce.edu.demo.repository.modelo.Pasaporte;
 import com.uce.edu.demo.service.ICiudadanoJpaService;
-import com.uce.edu.demo.service.IPersonaJpaService;
 
 
 @SpringBootApplication
@@ -35,29 +33,41 @@ public class ProyectoU2AbApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		
 		Ciudadano ciu1 = new Ciudadano();
-		ciu1.setNombre("Mike");
-		ciu1.setApellido("Wasouski");
+		ciu1.setNombre("Mike6");
+		ciu1.setApellido("Wasouski6");
+		ciu1.setCedula("172706");
+		ciu1.setFechaNacimiento(LocalDateTime.of(1996, 6, 25, 17, 41));
 		
-		Empleado empl1 = new Empleado();
-		empl1.setCodigoIess("1234");
-		empl1.setSalario(new BigDecimal(100));
-		//empl1.setCiudadano(ciu1);
 		
-		ciu1.setEmpleado(empl1);
+		Pasaporte pasa1 = new Pasaporte();
+		pasa1.setNumero("006");
+		pasa1.setFechaEmision(LocalDateTime.of(2012,6,8, 12, 21));
+		pasa1.setFechaCaducidad(LocalDateTime.now());
+		pasa1.setCiudadano(ciu1);
+		ciu1.setPasaporte(pasa1);
 		
-		this.iCiudadanoJpaService.Insertar(ciu1);
+		//Insertar 
+		this.iCiudadanoJpaService.insertar(ciu1);
 		
-		Ciudadano ciu2 = new Ciudadano();
-		ciu1.setNombre("Mike2");
-		ciu1.setApellido("Wasouski2");
+		//Actualizar
+
+		ciu1.setNombre("Miguel");
+		ciu1.setApellido("Walter");
+		ciu1.setCedula("172705");
+		ciu1.setFechaNacimiento(LocalDateTime.of(1996, 6, 25, 17, 41));
+		pasa1.setFechaCaducidad(LocalDateTime.of(2021,2,2, 12, 22));
+		ciu1.setPasaporte(pasa1);
+		this.iCiudadanoJpaService.actualizar(ciu1);
 		
-		Empleado empl2 = new Empleado();
-		empl2.setCodigoIess("12344");
-		empl2.setSalario(new BigDecimal(100));
-		empl2.setCiudadano(ciu2);
+		//Buscar
+		LOG.info("Ciudadano: "+this.iCiudadanoJpaService.buscarPorCedula("172701"));
 		
-		ciu1.setEmpleado(empl2);
-		//this.iCiudadanoJpaService.Insertar(empl2);
+		//Eliminar
+		this.iCiudadanoJpaService.eliminarPorCedula("172704");
+		
+		
+		
+
 		
 	}
 

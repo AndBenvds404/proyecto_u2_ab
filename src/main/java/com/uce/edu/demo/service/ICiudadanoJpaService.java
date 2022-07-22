@@ -4,5 +4,11 @@ import com.uce.edu.demo.repository.modelo.Ciudadano;
 
 public interface ICiudadanoJpaService {
 
-	public void Insertar (Ciudadano c);
+	public void insertar (Ciudadano c);
+	public Ciudadano buscar (String cedula);
+	public void actualizar (Ciudadano c);
+	public void eliminar (String cedula);
+	
+	public Ciudadano buscarPorCedula (String cedula);
+	public void eliminarPorCedula (String cedula);
 }
