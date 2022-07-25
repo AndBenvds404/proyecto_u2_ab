@@ -39,13 +39,11 @@ public class Ciudadano {
 	@OneToOne(mappedBy = "ciudadano", cascade = CascadeType.ALL)// nombre de variable igual al del atributo en la Tabla/entidad Empleado
 	private Empleado empleado;
 
-	
 	@Override
 	public String toString() {
 		return "Ciudadano [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
 				+ ", fechaNacimiento=" + fechaNacimiento + ", pasaporte=" + pasaporte + ", empleado=" + empleado + "]";
 	}
-	
 
 	public Integer getId() {
 		return id;
@@ -103,6 +101,8 @@ public class Ciudadano {
 		this.empleado = empleado;
 	}
 
+	
+	
 	
 	
 	

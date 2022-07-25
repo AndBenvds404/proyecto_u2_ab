@@ -34,15 +34,15 @@ public class Pasaporte {
 	@OneToOne
 	@JoinColumn(name="pasa_id_ciudadano")
 	private Ciudadano ciudadano;
-
-	
-//	@Override
-//	public String toString() {
-//		return "Pasaporte [id=" + id + ", numero=" + numero + ", fechaEmision=" + fechaEmision + ", fechaCaducidad="
-//				+ fechaCaducidad + ", ciudadano=" + ciudadano + "]";
-//	}
 	
 
+	@Override
+	public String toString() {
+		return "Pasaporte [id=" + id + ", numero=" + numero + ", fechaEmision=" + fechaEmision + ", fechaCaducidad="
+				+ fechaCaducidad + "]"; // Eliminamos la variable ciudadano puesto que imprime en bucle
+	}
+
+	
 	public Integer getId() {
 		return id;
 	}
@@ -82,11 +82,6 @@ public class Pasaporte {
 	public void setCiudadano(Ciudadano ciudadano) {
 		this.ciudadano = ciudadano;
 	}
-	
-	
-	
-	
-	
 
 	
 	

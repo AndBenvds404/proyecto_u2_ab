@@ -1,5 +1,9 @@
 package com.uce.edu.demo;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,26 +11,21 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.repository.modelo.onetomany.Habitacion;
-import com.uce.edu.demo.repository.modelo.onetomany.Hotel;
-import com.uce.edu.demo.service.ICiudadanoJpaService;
-import com.uce.edu.demo.service.IHabitacionService;
-import com.uce.edu.demo.service.IHotelService;
+import com.uce.edu.demo.tarea.modelo.Producto;
+import com.uce.edu.demo.tarea.modelo.Proveedor;
+import com.uce.edu.demo.tarea.service.IProductoService;
+import com.uce.edu.demo.tarea.service.IProveedorService;
 
 
 @SpringBootApplication
 public class ProyectoU2AbApplication implements CommandLineRunner{
 	
 	Logger LOG = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
-	
+
 	@Autowired
-	private IHotelService ihotelService;
-	
+	private IProveedorService iProveedorService;
 	@Autowired
-	private IHabitacionService iHabitacionService;
-	
-	@Autowired
-	private ICiudadanoJpaService iCiudadanoJpaService;
+	private IProductoService iProductoService;
 	
 	
 	public static void main(String[] args) {
@@ -37,23 +36,28 @@ public class ProyectoU2AbApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Hotel hotel1 = new Hotel();
-		hotel1.setId(1);
+		Proveedor prov = new Proveedor();
+		prov.setNombre("MaxLimpio3");
+		prov.setEmail("MaxLimpio3gmail.com");
+		prov.setNumContrato("300");
 		
-		Habitacion habitacion1 = new Habitacion();
-		habitacion1.setNumero("A1");
-		habitacion1.setPiso("2");
-		habitacion1.setTipo("matrimonial");
-		habitacion1.setHotelr(hotel1);
 		
-		Habitacion habitacion2 = new Habitacion();
-		habitacion2.setNumero("A2");
-		habitacion2.setTipo("solitario");
-		habitacion2.setPiso("2");
-		habitacion2.setHotelr(hotel1);
-		
-		this.iHabitacionService.insertar(habitacion1);
+		Producto prod = new Producto();
+		prod.setNombre("shampoo");
+		prod.setCantidad(13);
+		prod.setCodigoProducto("003");
+		prod.setPrecio(new BigDecimal(3));
 
+		List<Producto> productos = new ArrayList<>();
+		productos.add(prod);
+		
+		prov.setProductos(productos);
+		prod.setProveedor(prov);
+		
+		this.iProveedorService.insertar(prov);
+		this.iProveedorService.buscar("MaxLimpio2");
+		this.iProveedorService.actualizar(prov);
+		this.iProveedorService.eliminar("200");
 		
 	}
 
