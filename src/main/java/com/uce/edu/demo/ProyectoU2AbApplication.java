@@ -1,8 +1,7 @@
 package com.uce.edu.demo;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,21 +10,23 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.tarea.modelo.Producto;
-import com.uce.edu.demo.tarea.modelo.Proveedor;
-import com.uce.edu.demo.tarea.service.IProductoService;
-import com.uce.edu.demo.tarea.service.IProveedorService;
+import com.uce.edu.demo.repository.modelo.manytomany.Autor;
+import com.uce.edu.demo.repository.modelo.manytomany.Libro;
+import com.uce.edu.demo.service.manytomany.IAutorService;
+import com.uce.edu.demo.service.manytomany.ILibroService;
 
 
 @SpringBootApplication
 public class ProyectoU2AbApplication implements CommandLineRunner{
 	
 	Logger LOG = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
-
+	
 	@Autowired
-	private IProveedorService iProveedorService;
+	private ILibroService iLibroService;
+	
 	@Autowired
-	private IProductoService iProductoService;
+	private IAutorService iAutorService;
+	
 	
 	
 	public static void main(String[] args) {
@@ -36,29 +37,18 @@ public class ProyectoU2AbApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Proveedor prov = new Proveedor();
-		prov.setNombre("MaxLimpio3");
-		prov.setEmail("MaxLimpio3gmail.com");
-		prov.setNumContrato("300");
+		Autor a = new Autor();
+		a.setNombre("Amdre3");
+		//a.setLibros(null); Este no se necesita Setear (solo en MANYtoMANY)
 		
-		
-		Producto prod = new Producto();
-		prod.setNombre("shampoo");
-		prod.setCantidad(13);
-		prod.setCodigoProducto("003");
-		prod.setPrecio(new BigDecimal(3));
-
-		List<Producto> productos = new ArrayList<>();
-		productos.add(prod);
-		
-		prov.setProductos(productos);
-		prod.setProveedor(prov);
-		
-		this.iProveedorService.insertar(prov);
-		this.iProveedorService.buscar("MaxLimpio2");
-		this.iProveedorService.actualizar(prov);
-		this.iProveedorService.eliminar("200");
-		
+	//	this.iAutorService.insert(a);
+		Libro l = new Libro();
+		l.setTitulo("Las flores XD 3");
+		l.setPaginas("200");
+		Set<Autor> autores = new HashSet<>();
+		autores.add(a);
+		l.setAutores(autores);
+		this.iLibroService.insertar(l);
 	}
 
 }
