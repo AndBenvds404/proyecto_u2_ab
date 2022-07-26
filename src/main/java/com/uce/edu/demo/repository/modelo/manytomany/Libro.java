@@ -29,6 +29,7 @@ public class Libro {  //elegimos como main
 	@Column(name = "libr_cantidad_paginas")
 	private String paginas;
 	
+	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "libro_autor", joinColumns = @JoinColumn(name="liau_id_libro"),//elegimos cualquiera como tabla maestra
 				inverseJoinColumns = @JoinColumn(name="liau_id_autor")) 
