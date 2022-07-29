@@ -3,36 +3,50 @@ package com.uce.edu.demo.prueba.modelo;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-//@Entity
-//@Table(name="matricula")
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="matricula")
 public class Matricula {
 	
-//	@Id
-//	@Column(name = "matri_id")
-//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "matri_id_seq")
-//	@SequenceGenerator (name ="matri_id_seq",sequenceName = "matri_id_seq", allocationSize = 1)
+	@Id
+	@Column(name = "matri_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "matri_id_seq")
+	@SequenceGenerator (name ="matri_id_seq",sequenceName = "matri_id_seq", allocationSize = 1)
 	private Integer id;
 	
-//	@Column (name = "matri_fechaMatricula")
+	@Column (name = "matri_fechaMatricula")
 	private LocalDateTime fechaMatricula;
 	
-//	@Column (name = "matri_valorMatricula")
+	@Column (name = "matri_valorMatricula")
 	private BigDecimal valorMAtricula;
 	
-//	@Column (name = "matri_propietario")
+	@ManyToOne
+	@JoinColumn(name = "prop_matri_id")
 	private Propietario propietario;
 	
-//	@Column (name = "matri_vehiculo")	
+	@OneToOne
+	@JoinColumn(name = "matri_vehi_id")	
 	private Vehiculo vehiculo;
 	
 	
 	
+
+	
 	@Override
 	public String toString() {
 		return "Matricula [id=" + id + ", fechaMatricula=" + fechaMatricula + ", valorMAtricula=" + valorMAtricula
-				+ ", propietario=" + propietario + ", vehiculo=" + vehiculo + "]";
+				 + ", vehiculo=" + vehiculo + "]";
 	}
-	
 	//SET AND GET
 	public Integer getId() {
 		return id;
@@ -64,6 +78,7 @@ public class Matricula {
 	public void setVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 	}
+	
 	
 
 	

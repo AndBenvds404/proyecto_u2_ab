@@ -2,11 +2,13 @@ package com.uce.edu.demo.prueba.modelo;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -32,12 +34,17 @@ public class Vehiculo {
 	@Column (name = "vehi_precio")
 	private BigDecimal precio;
 	
+	@OneToOne(mappedBy = "vehiculo", cascade = CascadeType.ALL)
+	private Matricula matricula;
+	
 	
 	
 	@Override
 	public String toString() {
-		return "Vehiculo [marca=" + marca + ", placa=" + placa + ", tipo=" + tipo + ", precio=" + precio + "]";
+		return "Vehiculo [id=" + id + ", marca=" + marca + ", placa=" + placa + ", tipo=" + tipo + ", precio=" + precio
+				+  "]";
 	}
+	
 	
 	//SET AND GET
 	public String getMarca() {
@@ -64,7 +71,12 @@ public class Vehiculo {
 	public void setPrecio(BigDecimal precio) {
 		this.precio = precio;
 	}
-	
+	public void setMatricula(Matricula matricula) {
+		this.matricula = matricula;
+	}
+	public Matricula getMatricula() {
+		return matricula;
+	}
 	
 	
 

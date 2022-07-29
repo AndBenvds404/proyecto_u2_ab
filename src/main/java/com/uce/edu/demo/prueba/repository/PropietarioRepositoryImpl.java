@@ -36,6 +36,15 @@ public class PropietarioRepositoryImpl implements IPropietarioRepository{
 
 		return (Propietario) JpqlQuery.getSingleResult();
 	}
+
+	@Override
+	public void actualizar(Propietario p) {
+		// TODO Auto-generated method stub
+		this.entityManager.merge(p);
+		
+	}
+	
+	
 	
 	
 

@@ -9,19 +9,33 @@ import com.uce.edu.demo.prueba.repository.IPropietarioRepository;
 public class PropietarioServiceImpl implements IPropietarioService {
 	
 	@Autowired
-	private IPropietarioRepository propietarioRepository;
+	private IPropietarioRepository ipropietarioRepository;
 	
 	@Override
 	public void insertar(Propietario p) {
 		// TODO Auto-generated method stub
-		this.propietarioRepository.insertar(p);
+		this.ipropietarioRepository.insertar(p);
 	}
 
 	@Override
 	public void eliminar(String cedula) {
 		// TODO Auto-generated method stub
-		this.propietarioRepository.eliminar(cedula);
+		this.ipropietarioRepository.eliminar(cedula);
 		
 	}
+
+	@Override
+	public Propietario consultar(String cedula) {
+		// TODO Auto-generated method stub
+		return this.ipropietarioRepository.consultarPorCedula(cedula);
+	}
+
+	@Override
+	public void actualizar(Propietario p) {
+		// TODO Auto-generated method stub
+		this.ipropietarioRepository.actualizar(p);
+	}
+	
+	
 
 }

@@ -7,5 +7,6 @@ public interface IPropietarioRepository {
 	public void insertar (Propietario p);
 	public void eliminar (String cedula);
 	public Propietario consultarPorCedula(String cedula);
+	public void actualizar (Propietario p);
 
 }
